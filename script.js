@@ -17,8 +17,6 @@ const valorSaque = document.querySelector("#campoSaque");
 const valorTransferencia = document.querySelector("#campoValorTransferencia");
 const mensagem = document.querySelector("#mensagem");
 const nomeUsuario = document.querySelector("#nomeUsuario");
-const loginCorreto = "admin";
-const senhaCorreta = "123";
 // sections //
 const areaCliente = document.querySelector("#areaCliente");
 const areaDeposito = document.querySelector("#areaDeposito");
@@ -56,6 +54,7 @@ const retornarAreaCliente = () => {
     areaLogin.hidden = true;
     areaTransferencia.hidden = true;
     areaCliente.hidden = false;
+    botaoSair.textContent = "Sair";
     mensagem.textContent = "";
     
     
@@ -153,8 +152,13 @@ const validarLogin = () => {
         botaoVoltar.hidden = true;
         return;
     }
-    if (login.value.trim() === loginCorreto &&
-        senha.value === senhaCorreta) {
+    
+    const usuarioEncontrado = usuariosRegistrados.find(u => 
+        u.registroUsuario === login.value.trim() &&
+        u.registroSenha === senha.value
+    );
+    
+    if (usuarioEncontrado) {
 
         mensagem.textContent = "Login realizado com sucesso!";
         nomeUsuario.textContent = `Olá, ${login.value.trim()}`;
@@ -162,8 +166,9 @@ const validarLogin = () => {
         areaLogin.hidden = true;
         botaoSair.hidden = false;
         botaoVoltar.hidden = false;
-        mensagem.textContent = "";
         loginConfirmado = true;
+        mensagem.textContent = "";
+        botaoSair.textContent = "Sair";
 
     } else {
         mensagem.textContent = "Login ou senha inválidos!";
@@ -175,7 +180,30 @@ const validarLogin = () => {
     }
 }
 
+let usuariosRegistrados = [
+    
+
+];
+
+
+
 botaoConfirmarRegistro.addEventListener("click", () => {
+    
+    
+    const novoUsuario = loginRegistro.value.trim();
+    const novaSenha = senhaRegistro.value;
+  
+    usuariosRegistrados.push({ registroUsuario: novoUsuario, 
+        registroSenha: novaSenha })
+    
+    loginRegistro.value = "";
+    senhaRegistro.value = "";
+    
+    sairDaConta()
+    mensagem.textContent = `Olá ${novoUsuario}, sua conta foi criada com sucesso!`;
+    console.log(novoUsuario, novaSenha);
+    console.log(usuariosRegistrados)
+    
     
 });
 
@@ -183,10 +211,12 @@ botaoAreaRegistro.addEventListener("click", () => {
 
     areaLogin.hidden = true;
     
-        areaRegistro.hidden = false
+    areaRegistro.hidden = false;
+    
+    if (!areaRegistro.hidden) {
         botaoSair.hidden = false;
         botaoSair.textContent = "Voltar ao login";
-    
+    }
     
 });
 
