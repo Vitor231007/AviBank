@@ -1,0 +1,146 @@
+﻿<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <title>AviBank</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="script.js" defer></script>
+</head>
+
+<body>
+
+<main class="container">
+<h1>AviBank</h1>
+    
+<section id="areaLogin"> 
+      
+    <h6>Área de Login</h6>
+    <input id="campoLogin" type="text" placeholder="Login">
+      <input id="campoSenha" type="password" placeholder="Senha">
+    <button id="btnEntrar">Entrar</button>
+</section>
+    
+    <p id="nomeUsuario"></p>
+    <p id="mensagem"></p>
+    
+<section id="areaCliente" hidden>
+        
+    <h2>Conta Corrente</h2>
+    <p>Bem-Vindo a sua conta bancária</p>
+        <p>
+        <strong id="saldoAtual"></strong>
+        </p>
+    <h3>Ações Da Conta</h3>
+        <button id="btnAreaDeposito"
+                type="button"
+        >Area de depositos
+            
+        </button>
+        
+        <button id="btnAreaSaque"
+                type="button"
+        >Area de saques
+        </button>
+        
+        <button id="btnAreaTransferencia"
+                type="button"
+        >Area de transferencias
+        </button>
+        
+        <div class="historicoTransferencias">
+            <h3>Histórico de Movimentações</h3>
+        <al id="listaMovimentacoes"></al>
+        </div>
+        
+</section>
+    
+
+<section id="areaSaque" hidden>
+    
+<div class="acao">
+    <h3>Área de Saque</h3>
+<input id="campoSaque"
+       type="number"
+       min="0.1"
+       step="0.1"
+       placeholder="Digite o valor do saque">
+    
+    <button id="btnSacar"
+            type="button"
+    >Sacar</button>
+</div>
+    
+</section>
+        
+<section id="areaDeposito" hidden>
+    
+<div class="acao">
+    <h3>Depositar</h3>
+    
+    <input id="campoDeposito"
+           type="number"
+           min="0.1"
+           step="0.1"
+           placeholder="Valor"
+    >
+    
+    <button id="btnDepositar"
+            type="button"
+    >
+      Depositar  
+    </button>
+    
+ </div>
+    
+</section>
+        
+<section id="areaTransferencia" hidden>
+    
+<div class="acaoTransferencia">
+    <h3>Transferência Bancária</h3>
+    
+    <input id="campoChavePix"
+           placeholder="Insira a chave pix do destinatário"
+    >
+    
+    <input id="campoValorTransferencia"
+           type="number"
+           min="0.1"
+           step="0.1"
+           placeholder="Insira o valor da transferência"
+    >
+    
+    <button id="btnTransferir"
+            type="button"
+    >Transferir</button>
+    
+</div>
+        
+</section>
+
+    <button id="btnVoltar"
+            type="button" hidden>
+        Voltar
+    </button>
+
+    <button id="btnSair"
+            type="button" hidden>
+        Sair
+    </button>
+    
+   
+ <div class="areaAviso">
+<footer>
+
+    <p>ATENÇÃO!!!</p>
+<p>Projeto em construção, portanto as funcionalidades ainda estão sendo implementadas</p>
+    <p>Ambiente de simulação bancária</p>
+    <p>Projeto feito em JavaScript, HTML e CSS</p>
+    <p>Vitor Moura</p>
+    
+ </div>
+</footer>
+    
+</main>
+</body>
+</html>
