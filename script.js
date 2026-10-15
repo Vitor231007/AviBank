@@ -6,9 +6,12 @@ const botaoVoltar = document.querySelector("#btnVoltar");
 const botaoAreaDeposito = document.querySelector("#btnAreaDeposito");
 const botaoAreaSaque = document.querySelector("#btnAreaSaque");
 const botaoAreaTransferencia = document.querySelector("#btnAreaTransferencia");
+const botaoAreaRegistro = document.querySelector("#btnAreaRegistro");
 // input, mensagens e relacionados //
-const login = document.querySelector("#campoLogin");
-const senha = document.querySelector("#campoSenha");
+const login = document.querySelector("#campoUsuarioLogin");
+const senha = document.querySelector("#campoSenhaLogin");
+const loginRegistro = document.querySelector("#campoUsuarioRegistro");
+const senhaRegistro = document.querySelector("#campoSenhaRegistro");
 const valorDeposito = document.querySelector("#campoDeposito");
 const valorSaque = document.querySelector("#campoSaque");
 const valorTransferencia = document.querySelector("#campoValorTransferencia");
@@ -20,6 +23,7 @@ const senhaCorreta = "123";
 const areaCliente = document.querySelector("#areaCliente");
 const areaDeposito = document.querySelector("#areaDeposito");
 const areaLogin = document.querySelector("#areaLogin");
+const areaRegistro = document.querySelector("#areaRegistro");
 const areaSaque = document.querySelector("#areaSaque");
 const areaTransferencia = document.querySelector("#areaTransferencia");
 // logica //
@@ -27,6 +31,7 @@ const saldoAtual = document.querySelector("#saldoAtual");
 const botaoDeposito = document.querySelector("#btnDepositar");
 const botaoSaque = document.querySelector("#btnSacar");
 const botaoTransferir = document.querySelector("#btnTransferir");
+const botaoConfirmarRegistro = document.querySelector("#btnConfirmarRegistro");
 let loginConfirmado = false;
 let saldoCentavos = 150000;
 
@@ -64,6 +69,7 @@ const sairDaConta = () => {
     areaTransferencia.hidden = true   
     areaSaque.hidden = true
     areaLogin.hidden = false;
+    areaRegistro.hidden = true;
     botaoSair.hidden = true;
     botaoVoltar.hidden = true;
     loginConfirmado = false;
@@ -168,6 +174,21 @@ const validarLogin = () => {
         botaoVoltar.hidden = true;
     }
 }
+
+botaoConfirmarRegistro.addEventListener("click", () => {
+    
+});
+
+botaoAreaRegistro.addEventListener("click", () => {
+
+    areaLogin.hidden = true;
+    
+        areaRegistro.hidden = false
+        botaoSair.hidden = false;
+        botaoSair.textContent = "Voltar ao login";
+    
+    
+});
 
 botaoEntrar.addEventListener("click", () => {
 

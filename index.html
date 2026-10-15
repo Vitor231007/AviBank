@@ -15,9 +15,32 @@
 <section id="areaLogin"> 
       
     <h6>Área de Login</h6>
-    <input id="campoLogin" type="text" placeholder="Login">
-      <input id="campoSenha" type="password" placeholder="Senha">
+    <input id="campoUsuarioLogin" type="text" placeholder="Login">
+      <input id="campoSenhaLogin" type="password" placeholder="Senha">
     <button id="btnEntrar">Entrar</button>
+    
+    <p>Ainda não é cliente AviBank? <button 
+            id="btnAreaRegistro">Criar Conta</button>
+    </p>
+</section>
+    
+<section id="areaRegistro" hidden>
+    
+    <h6>Área de Registro</h6>
+    <input id="campoUsuarioRegistro"
+           type="text"
+           placeholder="Registre um nome de usuário"
+    >
+    
+    <input id="campoSenhaRegistro"
+           type="password"
+           placeholder="Insira uma senha"
+    >
+
+    <button id="btnConfirmarRegistro">
+        Registrar
+    </button>
+    
 </section>
     
     <p id="nomeUsuario"></p>
