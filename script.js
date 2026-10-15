@@ -49,7 +49,6 @@ const retornarAreaCliente = () => {
     areaDeposito.hidden = true;
     areaSaque.hidden = true;
     areaLogin.hidden = true;
-    areaLogin.hidden = true
     areaTransferencia.hidden = true;
     areaCliente.hidden = false;
     mensagem.textContent = "";
@@ -70,28 +69,87 @@ const sairDaConta = () => {
     loginConfirmado = false;
     login.value = "";
     senha.value = "";
+    valorTransferencia.value = "";
     mensagem.textContent = "";
     nomeUsuario.textContent = "";
 };
-    
 
-// botão "entrar" e validação de login //
-botaoEntrar.addEventListener("click", () => {
+// função para sacar dinheiro //
+const sacar = () => {
+
+    let valorReais = Number(valorSaque.value);
+
+    if (valorSaque.value.trim() === "" ||
+        valorReais <= 0 ||
+        !Number.isFinite(valorReais)) {
+
+        mensagem.textContent = 'Valor inválido!'
+        return;
+    }
+
+    const valorCentavos = Math.round(valorReais * 100);
+
+    if (saldoCentavos < valorCentavos) {
+
+        mensagem.textContent = 'Saldo insuficiente!'
+
+        return;
+
+    }
+
+    saldoCentavos -= valorCentavos;
+    atualizarSaldo();
+    retornarAreaCliente();
+
+    valorSaque.value = ""
+    mensagem.textContent = ""
+}
+
+// função para depositar dinheiro //
+const depositar = () => {
+
+    const valorReais = Number(valorDeposito.value);
+
+    if (valorDeposito.value.trim() === "" ||
+        !Number.isFinite(valorReais) ||
+        valorReais <= 0) {
+        mensagem.textContent = 'Valor inválido!';
+        return;
+    }
+
+    const valorCentavos = Math.round(valorReais * 100);
+
+    if (valorCentavos <= 0) {
+        mensagem.textContent = 'Informe um valor válido!';
+        return;
+    }
+
+    saldoCentavos += valorCentavos;
+    mensagem.textContent = "";
+    valorDeposito.value = "";
+
+    atualizarSaldo();
+    retornarAreaCliente();
+
+}
+
+// função para validar login //
+const validarLogin = () => {
 
     if (login.value.trim().length === 0 ||
         senha.value.trim().length === 0) {
-        
+
         mensagem.textContent = "Preenchimento inválido, preencha os campos de login!";
-        nomeUsuario.textContent = "";      
+        nomeUsuario.textContent = "";
         areaCliente.hidden = true;
         loginConfirmado = false;
         botaoSair.hidden = true;
         botaoVoltar.hidden = true;
         return;
-    } 
+    }
     if (login.value.trim() === loginCorreto &&
         senha.value === senhaCorreta) {
-        
+
         mensagem.textContent = "Login realizado com sucesso!";
         nomeUsuario.textContent = `Olá, ${login.value.trim()}`;
         areaCliente.hidden = false;
@@ -100,7 +158,7 @@ botaoEntrar.addEventListener("click", () => {
         botaoVoltar.hidden = false;
         mensagem.textContent = "";
         loginConfirmado = true;
-        
+
     } else {
         mensagem.textContent = "Login ou senha inválidos!";
         nomeUsuario.textContent = "";
@@ -109,7 +167,11 @@ botaoEntrar.addEventListener("click", () => {
         botaoSair.hidden = true;
         botaoVoltar.hidden = true;
     }
-    
+}
+
+botaoEntrar.addEventListener("click", () => {
+
+  validarLogin();
     
 });
     
@@ -131,34 +193,16 @@ botaoVoltar.addEventListener("click", () => {
 });
 
 botaoAreaDeposito.addEventListener("click", () => {
+    
     areaCliente.hidden = true;
     areaDeposito.hidden = false;
+    
 });
 
 botaoDeposito.addEventListener("click", () => {
- 
-  const valorReais = Number(valorDeposito.value);
-  
-  if (valorDeposito.value.trim() === "" || 
-      !Number.isFinite(valorReais) || 
-        valorReais <= 0) {
-  mensagem.textContent = 'Valor inválido!';
-      return;
-  }
-  
-  const valorCentavos = Math.round(valorReais * 100);
-  
-  if (valorCentavos <= 0) {
-      mensagem.textContent = 'Informe um valor válido!';
-      return;
-  }
-  
-  saldoCentavos += valorCentavos;
-  mensagem.textContent = "";
-    valorDeposito.value = "";
     
-    atualizarSaldo();
-    retornarAreaCliente();
+    depositar();
+    
 });    
 
 botaoAreaSaque.addEventListener("click", () => {
@@ -170,33 +214,7 @@ botaoAreaSaque.addEventListener("click", () => {
 
 botaoSaque.addEventListener("click", () => {
     
-    let valorReais = Number(valorSaque.value);
-    
-    if (valorSaque.value.trim() === "" || 
-        valorSaque.value <= 0 ||
-        !Number.isFinite(valorReais)) {
-     
-        mensagem.textContent = 'Valor inválido!'
-        return;
-    }
-    
-    const valorCentavos = Math.round(valorReais * 100);
-    
-    if (saldoCentavos < valorCentavos) {
-
-        mensagem.textContent = 'Saldo insuficiente!'
-        
-        return;
-
-    }
-    
-    saldoCentavos -= valorCentavos;
-    atualizarSaldo();
-    retornarAreaCliente();
-    
-    valorSaque.value = ""
-    mensagem.textContent = ""
-    
+    sacar();
 
 });
 
